@@ -1,10 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 import pymysql
 
 app = Flask(__name__)
 conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkstn")
 
-flightSql = """SELECT airline, 
+flightSql = """SELECT COALESCE(airline, 'TOTAL'),
             COUNT(CASE WHEN MONTH(arrdate) = 1 THEN airline END) AS 'JAN',
             COUNT(CASE WHEN MONTH(arrdate) = 2 THEN airline END) AS 'FEB',
             COUNT(CASE WHEN MONTH(arrdate) = 3 THEN airline END) AS 'MAR',
@@ -16,10 +16,12 @@ flightSql = """SELECT airline,
             COUNT(CASE WHEN MONTH(arrdate) = 9 THEN airline END) AS 'SEP',
             COUNT(CASE WHEN MONTH(arrdate) = 10 THEN airline END) AS 'OCT',
             COUNT(CASE WHEN MONTH(arrdate) = 11 THEN airline END) AS 'NOV',
-            COUNT(CASE WHEN MONTH(arrdate) = 12 THEN airline END) AS 'DEC'
+            COUNT(CASE WHEN MONTH(arrdate) = 12 THEN airline END) AS 'DEC',
+            COUNT(airline) AS 'TOTAL'
             FROM fltlog 
             WHERE ata IS NOT NULL AND chk != 'RTB' 
-            GROUP BY airline"""
+            GROUP BY airline
+            WITH ROLLUP"""
 
 totalChk = """SELECT airline, chk, 
             COUNT(CASE WHEN MONTH(arrdate) = 1 THEN chk END) AS 'JAN',
