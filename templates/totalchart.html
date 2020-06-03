@@ -33,7 +33,7 @@
         data: grand,
         type: 'line',
         backgroundColor: "rgba(153, 102, 255, 0.1)",
-        borderWidth: 1
+        borderWidth: 1,
     }
 
     {% for airline in data.0 %}
@@ -80,14 +80,13 @@
             datasets: set,
         },
         options: {
-            title:{
+            title: {
                 display: true,
                 text: 'Monthly Flights',
                 fontFamily: "'IBM Plex Sans', sans-serif",
                 fontSize: 16,
                 fontStyle: 'normal'
-            }
+            },
         }
-
     });
 </script>
