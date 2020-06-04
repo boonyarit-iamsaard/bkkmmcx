@@ -3,8 +3,10 @@ import pymysql
 import query
 
 app = Flask(__name__)
-# conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkstn")
-conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
+conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkstn")
+
+
+# conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
 
 
 @app.route("/")
@@ -33,6 +35,7 @@ def dashboard():
             cur.execute(query.totalOvn)
             totalovn = cur.fetchall()
             return totalovn
+
     x = ovn()
 
     test = (rows, columns, x)
