@@ -3,7 +3,7 @@ import pymysql
 import query
 
 app = Flask(__name__)
-conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkstn")
+conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
 
 
 # conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
@@ -38,7 +38,16 @@ def dashboard():
 
     x = ovn()
 
-    test = (rows, columns, x)
+    def wy():
+        with conn:
+            cur = conn.cursor()
+            cur.execute(query.wy)
+            wy = cur.fetchall()
+            return wy
+
+    wy = wy()
+
+    test = (rows, columns, x, wy)
     return render_template("base.html", data=test)
 
 
