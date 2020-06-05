@@ -3,7 +3,8 @@ import pymysql
 import query
 
 app = Flask(__name__)
-conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
+# conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
+conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
 
 
 @app.route("/")
@@ -45,7 +46,12 @@ def dashboard():
     wy = wy()
 
     test = (flight, check, ovn, wy)
-    return render_template("base.html", data=test)
+    return render_template("dashboard.html", data=test)
+
+
+@app.route('/create')
+def create():
+    return render_template('create.html')
 
 
 if __name__ == "__main__":

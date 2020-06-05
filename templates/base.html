@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
     <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -11,50 +10,9 @@
     />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-    <title>Dashboard</title>
+    <title>Title</title>
 </head>
 <body>
-<div class="container">
-    <h2 class="my-3 text-center">Dashboard</h2>
-    <div class="row mb-3">
-        {% for row in data.0 %}
-            <div class="col-md-3">
-                <div class="card">
-                    <p class="m-0 lead text-center">{{ row[0] }}</p>
-                    <p class="m-0 lead text-center">{{ row[-1] }}</p>
-                    <!-- <div class="card-header p-2">
-                    </div>
-                    <div class="card-body p-2">
-                    </div> -->
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="chart-container mb-3">
-        <canvas id="flight-chart"></canvas>
-    </div>
-    <div class="chart-container mb-3">
-        <canvas id="ovn-wy-chart"></canvas>
-    </div>
-    {% include 'totalflt.html' %}
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-<script
-        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"
-></script>
-{% include 'flight-chart.html' %}
-{% include 'ovn-wy-chart.html' %}
+
 </body>
 </html>

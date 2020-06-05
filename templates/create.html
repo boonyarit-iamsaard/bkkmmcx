@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+            crossorigin="anonymous"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>Add Flight</title>
+</head>
+<body>
+<div class="container py-3">
+    <form id="myForm" onsubmit="handleFlightSubmit(this)">
+        <!-- Flight Log -->
+        <div class="row">
+            <div class="col px-2">
+                <div class="card bg-light text-dark shadow-sm">
+                    <div class="card-header">
+                        <p class="text-center text-dark mb-0">Flight Log</p>
+                    </div>
+                    <div class="card-body px-3">
+                        <div class="row">
+                            <!-- Date -->
+                            <div class="col-md-4 col-form-label col-form-label-sm">
+                                <label for="date">Date</label>
+                                <input
+                                        type="date"
+                                        name="date"
+                                        class="form-control form-control-sm"
+                                        id="date"
+                                        autocomplete="off"
+                                        required
+                                />
+                            </div>
+                            <!-- Airline -->
+                            <div class="col-md-2 col-form-label col-form-label-sm">
+                                <label for="airline">Airline</label>
+                                <select
+                                        name="airline"
+                                        id="airline"
+                                        class="form-control form-control-sm required"
+                                >
+                                    <option value="CX">CX</option>
+                                    <option value="KA">KA</option>
+                                    <option value="LD">LD</option>
+                                    <option value="PR">PR</option>
+                                </select>
+                            </div>
+                            <!-- Flight No. -->
+                            <div class="col-md-2 col-form-label col-form-label-sm">
+                                <label for="fltno">Flight No.</label>
+                                <input
+                                        list="fltlist"
+                                        name="fltno"
+                                        class="form-control form-control-sm"
+                                        id="fltno"
+                                        required
+                                />
+                                <datalist id="fltlist">
+                                    <option value="613"></option>
+                                    <option value="616"></option>
+                                    <option value="617"></option>
+                                    <option value="619"></option>
+                                    <option value="653/654"></option>
+                                    <option value="700"></option>
+                                    <option value="701/704"></option>
+                                    <option value="751/708"></option>
+                                    <option value="831/842"></option>
+                                </datalist>
+                            </div>
+                            <div class="col-md-2 col-form-label col-form-label-sm">
+                                <label for="prefix">A/C Reg.</label>
+                                <select
+                                        name="prefix"
+                                        id="prefix"
+                                        class="form-control form-control-sm"
+                                        required
+                                >
+                                    <option value="B-">B-</option>
+                                    <option value="EI-">EI-</option>
+                                    <option value="RP-C">RP-C</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-form-label col-form-label-sm">
+                                <label class="text-light" for="acreg">A/C Reg.</label>
+                                <input
+                                        type="text"
+                                        name="acreg"
+                                        class="form-control form-control-sm"
+                                        id="acreg"
+                                        required
+                                />
+                            </div>
+                        </div>
+                        <!-- A/C Registration -->
+                        <div class="row mt-2">
+                            <div class="col-md-2 col-form-label col-form-label-sm">
+                                <label for="ata">ATA</label>
+                                <input
+                                        type="time"
+                                        name="ata"
+                                        class="form-control form-control-sm"
+                                        id="ata"
+                                />
+                            </div>
+                            <div class="col-md-2 col-form-label col-form-label-sm">
+                                <label for="atd">ATD</label>
+                                <input
+                                        type="time"
+                                        name="atd"
+                                        class="form-control form-control-sm"
+                                        id="atd"
+                                />
+                            </div>
+                            <div class="col-md-2 col-form-label col-form-label-sm">
+                                <label for="bay">Bay</label>
+                                <input
+                                        type="text"
+                                        name="bay"
+                                        class="form-control form-control-sm"
+                                        id="bay"
+                                        required
+                                />
+                            </div>
+                            <div class="col-md-2 col-form-label col-form-label-sm">
+                                <label for="chk">CHK</label>
+                                <input
+                                        type="text"
+                                        name="chk"
+                                        class="form-control form-control-sm"
+                                        id="chk"
+                                        required
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Servicing -->
+            <div class="col-md-6 col-lg-3 mt-3 px-2">
+                <div class="card bg-light text-dark h-100 shadow-sm">
+                    <div class="card-header">
+                        <p class="text-center text-dark mb-0">Servicing</p>
+                    </div>
+                    <div class="card-body px-3">
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="watersvc">Water Service</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="watersvc" class="form-control" id="watersvc">
+                                    <option value="YES">YES</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="wastersvc">Waste Service</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select
+                                        name="wastersvc"
+                                        class="form-control"
+                                        id="wastersvc"
+                                >
+                                    <option value="YES">YES</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="afac">400 Hz</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="afac"
+                                        class="form-control"
+                                        id="afac"
+                                        placeholder="minutes"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="gpu">GPU</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="gpu" class="form-control" id="gpu">
+                                    <option value="BFS">BFS</option>
+                                    <option value="TG">TG</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="asu">ASU</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="asu" class="form-control" id="asu">
+                                    <option value="BFS">BFS</option>
+                                    <option value="TG">TG</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="acu">ACU</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="acu" class="form-control" id="acu">
+                                    <option value="BFS">BFS</option>
+                                    <option value="TG">TG</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="brk">Brake Cooling</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="brk" class="form-control" id="brk">
+                                    <option value="BFS">BFS</option>
+                                    <option value="TG">TG</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="cherry">Cherry Picker</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="cherry" class="form-control" id="cherry">
+                                    <option value="BFS">BFS</option>
+                                    <option value="TG">TG</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="platform">Platform</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="platform" class="form-control" id="platform">
+                                    <option value="BFS">BFS</option>
+                                    <option value="TG">TG</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Work Package & ADDs -->
+            <div class="col-md-6 col-lg-3 mt-3 px-2">
+                <div class="card bg-light text-dark h-100 shadow-sm">
+                    <div class="card-header">
+                        <p class="text-center text-dark mb-0">PKG & ADD</p>
+                    </div>
+                    <div class="card-body px-3">
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="pkg">PKG</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="pkg"
+                                        class="form-control"
+                                        id="pkg"
+                                        value="0"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="padd">PADD</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="padd"
+                                        class="form-control"
+                                        id="padd"
+                                        value="0"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="sadd">SADD</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="sadd"
+                                        class="form-control"
+                                        id="sadd"
+                                        value="0"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="add">ADD</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="add"
+                                        class="form-control"
+                                        id="add"
+                                        value="0"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="zadd">ZADD</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="zadd"
+                                        class="form-control"
+                                        id="zadd"
+                                        value="0"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="cadd">CADD</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="cadd"
+                                        class="form-control"
+                                        id="cadd"
+                                        value="0"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="madd">MADD</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="madd"
+                                        class="form-control"
+                                        id="madd"
+                                        value="0"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="work">Worked</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="number"
+                                        name="work"
+                                        class="form-control"
+                                        id="work"
+                                        value="0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Overnight -->
+            <div class="col-md-6 col-lg-3 mt-3 px-2">
+                <div class="card bg-light text-dark h-100 shadow-sm">
+                    <div class="card-header">
+                        <p class="text-center text-dark mb-0">Overnight</p>
+                    </div>
+                    <div class="card-body px-3">
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="ovnbay">Overnight Bay</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="text"
+                                        name="ovnbay"
+                                        class="form-control"
+                                        id="ovnbay"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="tpc">TPC</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="tpc" class="form-control" id="tpc">
+                                    <option value="YES">YES</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="waterdrain">Water Drain</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select
+                                        name="waterdrain"
+                                        class="form-control"
+                                        id="waterdrain"
+                                >
+                                    <option value="YES">YES</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="wastedrain">Waste Drain</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select
+                                        name="wastedrain"
+                                        class="form-control"
+                                        id="wastedrain"
+                                >
+                                    <option value="YES">YES</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="fueldrain">Fuel Drain</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select
+                                        name="fueldrain"
+                                        class="form-control"
+                                        id="fueldrain"
+                                >
+                                    <option value="YES">YES</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="stand">Stand</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="stand" class="form-control" id="stand">
+                                    <option value="YES">YES</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="acwsh">A/C Wash</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="acwsh" class="form-control" id="acwsh">
+                                    <option value="YES">YES</option>
+                                    <option value="NO" selected>NO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mt-3 px-2">
+                <div class="card bg-light text-dark h-100 shadow-sm">
+                    <div class="card-header">
+                        <p class="text-center text-dark mb-0">Handling By</p>
+                    </div>
+                    <div class="card-body px-3">
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="mech1">MECH-1</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        list="mechlist"
+                                        name="mech1"
+                                        class="form-control"
+                                        id="mech1"
+                                        size="4"
+                                        required
+                                />
+                                <datalist id="mechlist">
+                                    <option value="M4"></option>
+                                    <option value="M6"></option>
+                                    <option value="M9"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="mech-2">MECH-2</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        list="mechlist"
+                                        name="mech2"
+                                        class="form-control"
+                                        id="mech2"
+                                        size="4"
+                                />
+                                <datalist id="mechlist">
+                                    <option value="M4"></option>
+                                    <option value="M6"></option>
+                                    <option value="M9"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="eic">EIC</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        list="eiclist"
+                                        name="eic"
+                                        class="form-control"
+                                        id="eic"
+                                        size="4"
+                                        required
+                                />
+                                <datalist id="eiclist"></datalist>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6 col-form-label col-form-label-sm">
+                                <label for="tda">TDA</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="time"
+                                        name="tda"
+                                        class="form-control"
+                                        id="tda"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Handling -->
+        <div class="row">
+            <div class="col-md-6 mt-3 px-2">
+                <div class="card bg-light text-dark h-100 shadow-sm">
+                    <div class="card-header">
+                        <p class="text-center text-dark mb-0">
+                            Flight Remark
+                        </p>
+                    </div>
+                    <div class="card-body px-3">
+                        <div class="row mt-2">
+                            <div class="col">
+                    <textarea
+                            name="fltrmk"
+                            class="form-control"
+                            id="fltrmk"
+                            cols="50"
+                            rows="5"
+                    ></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-3 col-form-label col-form-label-sm">
+                                <label for="record">Record By</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input
+                                        list="namelist"
+                                        name="record"
+                                        class="form-control"
+                                        id="record"
+                                        required
+                                />
+                            </div>
+                            <datalist id="namelist"></datalist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mt-3 px-2">
+                <div class="row">
+                    <div class="col">
+                        <button
+                                class="btn btn-primary btn-block border border-light"
+                                type="submit"
+                        >
+                            Add Flight
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>
