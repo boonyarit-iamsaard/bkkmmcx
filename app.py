@@ -15,7 +15,7 @@ def dashboard():
             total = cur.fetchall()
             return total
 
-    rows = flight()
+    flight = flight()
 
     def check():
         with conn:
@@ -24,7 +24,7 @@ def dashboard():
             airline = cur.fetchall()
             return airline
 
-    columns = check()
+    check = check()
 
     def ovn():
         with conn:
@@ -33,7 +33,7 @@ def dashboard():
             totalovn = cur.fetchall()
             return totalovn
 
-    x = ovn()
+    ovn = ovn()
 
     def wy():
         with conn:
@@ -44,7 +44,7 @@ def dashboard():
 
     wy = wy()
 
-    test = (rows, columns, x, wy)
+    test = (flight, check, ovn, wy)
     return render_template("base.html", data=test)
 
 
