@@ -95,3 +95,17 @@ pkdadd = """SELECT DATE_FORMAT(arrdate, '%M') AS 'MONTH',
         WHERE ata IS NOT NULL and atd IS NULL
         GROUP BY MONTH(arrdate)
         WITH ROLLUP"""
+
+sumadd = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '1',
+    SUM(CASE WHEN MONTH(arrdate) = 2 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '2',
+    SUM(CASE WHEN MONTH(arrdate) = 3 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '3',
+    SUM(CASE WHEN MONTH(arrdate) = 4 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '4',
+    SUM(CASE WHEN MONTH(arrdate) = 5 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '5',
+    SUM(CASE WHEN MONTH(arrdate) = 6 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '6',
+    SUM(CASE WHEN MONTH(arrdate) = 7 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '7',
+    SUM(CASE WHEN MONTH(arrdate) = 8 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '8',
+    SUM(CASE WHEN MONTH(arrdate) = 9 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '9',
+    SUM(CASE WHEN MONTH(arrdate) = 10 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '10',
+    SUM(CASE WHEN MONTH(arrdate) = 11 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '11',
+    SUM(CASE WHEN MONTH(arrdate) = 12 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '12'
+    FROM fltlog"""

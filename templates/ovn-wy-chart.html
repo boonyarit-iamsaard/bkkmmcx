@@ -26,13 +26,19 @@
             "rgba(153, 102, 255, 1)",
             "rgba(255, 159, 64, 1)",
         ];
+        let sumAdd = [];
+        //Sum ADD dataset
+        {% for i in range(11) %}
+            sumAdd.push('{{ data[5][i] }}')
+        {% endfor %}
+        console.log(sumAdd);
 
+        // WY dataset
         {% for k in range(1, 13) %}
             grand.push('{{data[3][-1][k]}}')
         {% endfor %}
 
         let b = {
-            //label: '{{ data[3][-1][0] }}',
             label: 'WY',
             data: grand,
             type: 'line',
