@@ -28,11 +28,10 @@
         ];
         // Total ADDs cleared dataset
         let totalAddClrd = [];
-        {% for row in data.4 %}
-            totalAddClrd.push('{{ row[-1] }}')
+        {% for item in data.5 %}
+            totalAddClrd.push('{{ item }}')
         {% endfor %}
-        // totalAddClrd.pop()
-        console.log(totalAddClrd)
+
         let addClrd = {
             label: 'ADD CLRD',
             data: totalAddClrd,
@@ -40,6 +39,7 @@
             backgroundColor: "rgba(153, 102, 255, 0.1)",
             borderWidth: 1,
             pointRadius: 2,
+            lineTension: 0,
             yAxisID: 'second-y-axis'
         }
 

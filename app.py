@@ -4,8 +4,9 @@ import query
 
 app = Flask(__name__)
 # conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
-conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
-# conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkstn")
+
+
+conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkstn")
 
 
 @app.route("/")
@@ -59,7 +60,7 @@ def dashboard():
         with conn:
             cur = conn.cursor()
             cur.execute(query.sumadd)
-            totaladd = cur.fetchall()
+            totaladd = cur.fetchone()
             return totaladd
 
     sumadd = sumadd()
