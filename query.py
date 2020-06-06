@@ -80,3 +80,18 @@ wy = """SELECT COALESCE(airline, 'TOTAL'),
         WHERE chk = 'WY' 
         GROUP BY airline
         WITH ROLLUP"""
+
+pkdadd = """SELECT DATE_FORMAT(arrdate, '%M') AS 'MONTH',
+        SUM(pkg) AS 'PKG',
+        SUM(padd) AS 'PADD',
+        SUM(sadd) AS 'SADD',
+        SUM(`add`) AS 'ADD',
+        SUM(zadd) AS 'ZADD',
+        SUM(cadd) AS 'CADD',
+        SUM(madd) AS 'MADD',
+        SUM(worked) AS 'WORKED',
+        SUM(padd+sadd+`add`+zadd+cadd+madd) AS 'TOTAL ADD CLRD'
+        FROM fltlog
+        WHERE ata IS NOT NULL and atd IS NULL
+        GROUP BY MONTH(arrdate)
+        WITH ROLLUP"""

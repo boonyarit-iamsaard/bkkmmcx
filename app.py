@@ -4,7 +4,8 @@ import query
 
 app = Flask(__name__)
 # conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
-conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
+# conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
+conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkstn")
 
 
 @app.route("/")
@@ -40,13 +41,27 @@ def dashboard():
         with conn:
             cur = conn.cursor()
             cur.execute(query.wy)
-            wy = cur.fetchall()
-            return wy
+            totalwy = cur.fetchall()
+            return totalwy
 
     wy = wy()
 
-    test = (flight, check, ovn, wy)
-    return render_template("dashboard.html", data=test)
+    def pkgadd():
+        with conn:
+            cur = conn.cursor()
+            cur.execute(query.pkdadd)
+            totalpkgadd = cur.fetchall()
+            return totalpkgadd
+
+    pkgadd = pkgadd()
+
+    # flight = data.0
+    # check = data.1
+    # ovn = data.2
+    # wy = data.3
+    # pkgadd = data.4
+    datas = (flight, check, ovn, wy, pkgadd)
+    return render_template("dashboard.html", data=datas)
 
 
 @app.route('/create')
