@@ -1,0 +1,98 @@
+{% set months = ('JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC') %}
+
+<!-- Flights -->
+<div class="row">
+    <div class="col">
+        <div class="card"><h4 class="text-center my-1">Flights</h4></div>
+    </div>
+</div>
+<table class="table table-sm table-striped table-responsive-sm mt-3">
+    <thead class="thead-dark">
+    <tr>
+        <th>AIRLINE</th>
+        {% for month in months %}
+            <th>{{ month }}</th>
+        {% endfor %}
+        <th>TOTAL</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in data.0 %}
+        <tr>
+            {% for td in row %}
+                <td>{{ td }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- Overnight -->
+<div class="row">
+    <div class="col">
+        <div class="card"><h4 class="text-center my-1">Overnight</h4></div>
+    </div>
+</div>
+<table class="table table-sm table-striped  table-responsive-sm mt-3">
+    <thead class="thead-dark">
+    <tr>
+        <th>AIRLINE</th>
+        {% for item in months %}
+            <th>{{ item }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    {% for row in data.2 %}
+        <tr>
+            {% for td in row %}
+                <td>{{ td }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+
+<!-- Checks -->
+<div class="row">
+    <div class="col">
+        <div class="card"><h4 class="text-center my-1">Checks</h4></div>
+    </div>
+</div>
+<table class="table table-sm table-striped table-responsive-sm mt-3">
+    <thead class="thead-dark">
+    <tr>
+        <th>AIRLINE</th>
+        <th>CHECK</th>
+        {% for item in months %}
+            <th>{{ item }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in data.1 %}
+        <tr>
+            {% for td in row %}
+                <td>{{ td }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<h4>WY : Monthly</h4>
+<table class="table table-sm table-striped  table-responsive-sm ">
+    <thead class="thead-dark">
+    <tr>
+        <th>AIRLINE</th>
+        {% for item in months %}
+            <th>{{ item }}</th>
+        {% endfor %}
+        <th>TOTAL</th>
+    </tr>
+    </thead>
+    {% for row in data.3 %}
+        <tr>
+            {% for td in row %}
+                <td>{{ td }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
