@@ -70,6 +70,7 @@ def dashboard():
     # ovn = data.2
     # wy = data.3
     # pkgadd = data.4
+    # sumadd = data.5
     datas = (flight, check, ovn, wy, pkgadd, sumadd)
     return render_template("dashboard.html", data=datas)
 
