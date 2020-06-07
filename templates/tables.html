@@ -65,22 +65,3 @@
     {% endfor %}
     </tbody>
 </table>
-<h4 class="">WY</h4>
-<table class="table table-sm table-striped  table-responsive-sm ">
-    <thead class="thead-dark">
-    <tr>
-        <th>AIRLINE</th>
-        {% for item in months %}
-            <th>{{ item }}</th>
-        {% endfor %}
-        <th>TOTAL</th>
-    </tr>
-    </thead>
-    {% for row in data.3 %}
-        <tr>
-            {% for td in row %}
-                <td>{{ td }}</td>
-            {% endfor %}
-        </tr>
-    {% endfor %}
-</table>

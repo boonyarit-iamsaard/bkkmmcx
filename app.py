@@ -4,10 +4,10 @@ import query
 import datetime
 
 app = Flask(__name__)
-# conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
+conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
 
 
-conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkeng")
+# conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkeng")
 
 
 @app.route("/")
