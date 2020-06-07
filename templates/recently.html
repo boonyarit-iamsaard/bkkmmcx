@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h4 class="text-center m-3">Recently Added</h4>
+        <table class="table table-sm table-striped table-responsive-sm mt-3">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>DATE</th>
+                <th>AIRLINE</th>
+                <th>FLT NO.</th>
+                <th></th>
+                <th>A/C REG.</th>
+                <th>ATA</th>
+                <th>ATD</th>
+                <th>BAY</th>
+                <th>CHK</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            {% for row in data %}
+                <tr>
+                    {% for td in row %}
+                        <td>{{ td }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('create') }}" class="btn btn-success btn-sm">Add Flight</a>
+    </div>
+{% endblock %}
