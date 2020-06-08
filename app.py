@@ -170,7 +170,6 @@ def insert():
         record = request.form['record']
         print(type(arrdate))
         with conn.cursor() as cursor:
-            cursor.ping(reconnect=True)
             sql = query.insert
             cursor.execute(sql, (arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk,
                                  watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, int(pkg), int(padd),
