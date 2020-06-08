@@ -169,14 +169,16 @@ def insert():
         fltrmk = request.form['fltrmk']
         record = request.form['record']
         print(type(arrdate))
-        with conn.cursor() as cursor:
+        with conn:
+            conn.ping(reconnect=True)
+            cur = conn.cursor()
             sql = query.insert
-            cursor.execute(sql, (arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk,
-                                 watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, int(pkg), int(padd),
-                                 int(sadd), int(add),
-                                 int(zadd), int(cadd), int(madd), int(worked), ovnbay, tpc, waterdrain, wastedrain,
-                                 fueldrain, stand, acwsh,
-                                 mech1, mech2, eng, tda, fltrmk, record))
+            cur.execute(sql, (arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk,
+                              watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, int(pkg), int(padd),
+                              int(sadd), int(add),
+                              int(zadd), int(cadd), int(madd), int(worked), ovnbay, tpc, waterdrain, wastedrain,
+                              fueldrain, stand, acwsh,
+                              mech1, mech2, eng, tda, fltrmk, record))
             conn.commit()
         return redirect(url_for('recently'))
 
@@ -189,7 +191,6 @@ def recently():
         cur.execute(query.recently)
         recentlyadded = cur.fetchall()
         return render_template('recently.html', title='Recently Added', data=recentlyadded)
-
 
 # if __name__ == "__main__":
 #     app.run(debug=True)
