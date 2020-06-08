@@ -14,6 +14,7 @@ def dashboard():
     def flight():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.totalflt)
             total = cur.fetchall()
             return total
@@ -23,6 +24,7 @@ def dashboard():
     def check():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.totalChk)
             airline = cur.fetchall()
             return airline
@@ -32,6 +34,7 @@ def dashboard():
     def ovn():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.totalOvn)
             totalovn = cur.fetchall()
             return totalovn
@@ -41,6 +44,7 @@ def dashboard():
     def wy():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.wy)
             totalwy = cur.fetchall()
             return totalwy
@@ -50,6 +54,7 @@ def dashboard():
     def addclrd():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.addclrd)
             add = cur.fetchone()
             return add
@@ -59,6 +64,7 @@ def dashboard():
     def addworked():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.addworked)
             totaladd = cur.fetchone()
             return totaladd
@@ -68,6 +74,7 @@ def dashboard():
     def pkg():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.pkg)
             totalpkg = cur.fetchone()
             return totalpkg
@@ -91,6 +98,7 @@ def create():
     def staff():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.staff)
             namelist = cur.fetchall()
             return namelist
@@ -100,6 +108,7 @@ def create():
     def eic():
         with conn:
             cur = conn.cursor()
+            cur.ping(reconnect=True)
             cur.execute(query.eic)
             recentlyadded = cur.fetchall()
             return recentlyadded
@@ -161,6 +170,7 @@ def insert():
         record = request.form['record']
         print(type(arrdate))
         with conn.cursor() as cursor:
+            cursor.ping(reconnect=True)
             sql = query.insert
             cursor.execute(sql, (arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk,
                                  watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, int(pkg), int(padd),
@@ -176,6 +186,7 @@ def insert():
 def recently():
     with conn:
         cur = conn.cursor()
+        cur.ping(reconnect=True)
         cur.execute(query.recently)
         recentlyadded = cur.fetchall()
         return render_template('recently.html', title='Recently Added', data=recentlyadded)
