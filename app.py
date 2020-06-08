@@ -13,8 +13,8 @@ conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5e
 def dashboard():
     def flight():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.totalflt)
             total = cur.fetchall()
             return total
@@ -23,8 +23,8 @@ def dashboard():
 
     def check():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.totalChk)
             airline = cur.fetchall()
             return airline
@@ -33,8 +33,8 @@ def dashboard():
 
     def ovn():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.totalOvn)
             totalovn = cur.fetchall()
             return totalovn
@@ -43,8 +43,8 @@ def dashboard():
 
     def wy():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.wy)
             totalwy = cur.fetchall()
             return totalwy
@@ -53,8 +53,8 @@ def dashboard():
 
     def addclrd():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.addclrd)
             add = cur.fetchone()
             return add
@@ -63,8 +63,8 @@ def dashboard():
 
     def addworked():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.addworked)
             totaladd = cur.fetchone()
             return totaladd
@@ -73,8 +73,8 @@ def dashboard():
 
     def pkg():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.pkg)
             totalpkg = cur.fetchone()
             return totalpkg
@@ -97,8 +97,8 @@ def dashboard():
 def create():
     def staff():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.staff)
             namelist = cur.fetchall()
             return namelist
@@ -107,8 +107,8 @@ def create():
 
     def eic():
         with conn:
+            conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.ping(reconnect=True)
             cur.execute(query.eic)
             recentlyadded = cur.fetchall()
             return recentlyadded
@@ -184,8 +184,8 @@ def insert():
 @app.route('/recently')
 def recently():
     with conn:
+        conn.ping(reconnect=True)
         cur = conn.cursor()
-        cur.ping(reconnect=True)
         cur.execute(query.recently)
         recentlyadded = cur.fetchall()
         return render_template('recently.html', title='Recently Added', data=recentlyadded)
