@@ -130,7 +130,7 @@ insert = """INSERT INTO flight (arrdate, airline, fltno, prefix, acreg, ata, atd
     mech1, mech2, eng, tda, fltrmk, record) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
     %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
 
-recently = """SELECT id, arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk 
+recently = """SELECT arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk 
     FROM flight
     ORDER BY id DESC
     LIMIT 10"""
