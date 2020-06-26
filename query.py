@@ -12,8 +12,8 @@ totalflt = """SELECT COALESCE(airline, 'TOTAL'),
             COUNT(CASE WHEN MONTH(arrdate) = 11 THEN airline END) AS 'NOV',
             COUNT(CASE WHEN MONTH(arrdate) = 12 THEN airline END) AS 'DEC',
             COUNT(airline) AS 'TOTAL'
-            FROM flight 
-            WHERE ata IS NOT NULL AND chk != 'RTB' 
+            FROM flight
+            WHERE ata IS NOT NULL AND chk != 'RTB'
             GROUP BY airline
             WITH ROLLUP"""
 
@@ -124,13 +124,15 @@ staff = "SELECT name FROM staff"
 
 eic = "SELECT name FROM staff WHERE role = 'LAME'"
 
-insert = """INSERT INTO flight (arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk, 
+insert = """INSERT INTO flight (fltid, arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk, 
     watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, pkg, padd, sadd, `add`, 
     zadd, cadd, madd, worked, ovnbay, tpc, waterdrain, wastedrain, fueldrain, stand, wash, 
-    mech1, mech2, eng, tda, fltrmk, record) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+    mech1, mech2, eng, tda, fltrmk, record) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
     %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
 
-recently = """SELECT arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk 
+recently = """SELECT fltid, arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk 
     FROM flight
-    ORDER BY id DESC
+    ORDER BY fltid DESC
     LIMIT 10"""
+
+last = "SELECT fltid FROM flight ORDER BY fltid DESC LIMIT 1"

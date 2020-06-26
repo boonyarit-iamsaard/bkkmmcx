@@ -69,7 +69,7 @@
         }
 
         //Overnight dataset
-        {% for a in range(0, 3) %}
+        {% for a in range(0, data[2]|length) %}
             ovn.push([])
             {% for i in range(1, 13) %}
                 ovn[j].push({{ data[2][a][i] }})

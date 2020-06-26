@@ -42,7 +42,7 @@
             yAxisID: 'second-y-axis'
         }
 
-        {% for a in range(0, 3) %}
+        {% for a in range(0, data[0]|length - 1) %}
             totalFlt.push([])
             {% for i in range(1, 13) %}
                 totalFlt[j].push({{ data[0][a][i] }})

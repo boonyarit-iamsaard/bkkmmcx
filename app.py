@@ -3,10 +3,10 @@ import pymysql
 import query
 
 app = Flask(__name__)
-conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
+# conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
 
 
-# conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkeng")
+conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkeng")
 
 
 @app.route("/")
@@ -168,12 +168,15 @@ def insert():
         # Flight remark
         fltrmk = request.form['fltrmk']
         record = request.form['record']
-        print(type(arrdate))
         with conn:
             conn.ping(reconnect=True)
             cur = conn.cursor()
+            cur.execute(query.last)
+            last = cur.fetchone()
+            last = last[0] + 1
+            print(last)
             sql = query.insert
-            cur.execute(sql, (arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk,
+            cur.execute(sql, (last, arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk,
                               watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, int(pkg), int(padd),
                               int(sadd), int(add),
                               int(zadd), int(cadd), int(madd), int(worked), ovnbay, tpc, waterdrain, wastedrain,
@@ -192,5 +195,6 @@ def recently():
         recentlyadded = cur.fetchall()
         return render_template('recently.html', title='Recently Added', data=recentlyadded)
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+
+if __name__ == "__main__":
+    app.run(debug=True)
