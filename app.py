@@ -3,10 +3,10 @@ import pymysql
 import query
 
 app = Flask(__name__)
-# conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
+conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
 
 
-conn = pymysql.connect("localhost", "root", "cxbkkeng", "cxbkkeng")
+# conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
 
 
 @app.route("/")
@@ -196,5 +196,5 @@ def recently():
         return render_template('recently.html', title='Recently Added', data=recentlyadded)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
