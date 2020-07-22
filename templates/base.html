@@ -9,6 +9,7 @@
             crossorigin="anonymous"
     />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{{ title }}</title>
 </head>
@@ -27,6 +28,22 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('recently') }}">Add Flight</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Reports
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item bg-dark text-white-50" href="#"
+                       style="font-size: 0.875rem; font-weight: lighter">Flight</a>
+                    <a class="dropdown-item bg-dark text-white-50" href="#"
+                       style="font-size: 0.875rem; font-weight: lighter">Overnight</a>
+                    <a class="dropdown-item bg-dark text-white-50" href="#"
+                       style="font-size: 0.875rem; font-weight: lighter">Check</a>
+                    <a class="dropdown-item bg-dark text-white-50" href="#"
+                       style="font-size: 0.875rem; font-weight: lighter">Servicing</a>
+                </div>
             </li>
         </ul>
     </div>
@@ -52,6 +69,8 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"
 ></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 {% block script %}
 
