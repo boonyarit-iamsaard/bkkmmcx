@@ -130,7 +130,13 @@ insert = """INSERT INTO flight (fltid, arrdate, airline, fltno, prefix, acreg, a
     mech1, mech2, eng, tda, fltrmk, record) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
     %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
 
-recently = """SELECT fltid, DATE_FORMAT(arrdate, '%d %b %y'), airline, fltno, prefix, acreg, TIME_FORMAT(ata, '%H:%i'), TIME_FORMAT(atd, '%H:%i'), bay, chk 
+update = """UPDATE flight SET arrdate=%s, airline=%s, fltno=%s, prefix=%s, acreg=%s, ata=%s, atd=%s, bay=%s, chk=%s
+    ,watersvc=%s, wastesvc=%s, afac=%s, gpu=%s, asu=%s, acu=%s, brk=%s, cherry=%s, platform=%s, pkg=%s, padd=%s, sadd=%s
+    ,`add`=%s,zadd=%s, cadd=%s, madd=%s, worked=%s, ovnbay=%s, tpc=%s, waterdrain=%s, wastedrain=%s, fueldrain=%s
+    ,stand=%s, wash=%s,mech1=%s, mech2=%s, eng=%s, tda=%s, fltrmk=%s, record=%s WHERE fltid=%s"""
+
+flight_log = """SELECT fltid, DATE_FORMAT(arrdate, '%d %b %y'), airline, fltno, prefix, acreg, TIME_FORMAT(ata, '%H:%i')
+    , TIME_FORMAT(atd, '%H:%i'), bay, chk 
     FROM flight
     ORDER BY fltid DESC
     LIMIT 300"""

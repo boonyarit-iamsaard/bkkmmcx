@@ -19,7 +19,6 @@
                 <th>CHK</th>
                 <th></th>
                 <th></th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -28,8 +27,7 @@
                     {% for td in row %}
                         <td>{{ td }}</td>
                     {% endfor %}
-                    <td><a href="" class="btn btn-sm btn-secondary">View</a></td>
-                    <td><a href="" class="btn btn-sm btn-info">Update</a></td>
+                    <td><a href="/details/{{ row.0 }}" class="btn btn-sm btn-info">Update</a></td>
                     <td><a href="" class="btn btn-sm btn-danger disabled">Delete</a></td>
                 </tr>
             {% endfor %}

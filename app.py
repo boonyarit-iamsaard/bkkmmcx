@@ -183,17 +183,90 @@ def insert():
                               fueldrain, stand, acwsh,
                               mech1, mech2, eng, tda, fltrmk, record))
             conn.commit()
-        return redirect(url_for('recently'))
+        return redirect(url_for('flight_log'))
 
 
-@app.route('/recently')
-def recently():
+@app.route('/details/<string:id_data>', methods=['GET'])
+def details(id_data):
     with conn:
         conn.ping(reconnect=True)
         cur = conn.cursor()
-        cur.execute(query.recently)
-        recentlyadded = cur.fetchall()
-        return render_template('recently.html', title='Recently Added', data=recentlyadded)
+        cur.execute('SELECT * FROM flight WHERE fltid=%s', id_data)
+        update_flight = cur.fetchone()
+        return render_template('details.html', data=update_flight)
+
+
+@app.route('/update/<string:id_data>', methods=['POST'])
+def update(id_data):
+    if request.method == 'POST':
+        fltid = id_data
+        # Flight details
+        arrdate = request.form['arrdate']
+        airline = request.form['airline']
+        fltno = request.form['fltno']
+        prefix = request.form['prefix']
+        acreg = request.form['acreg']
+        ata = request.form['ata']
+        atd = request.form['atd']
+        bay = request.form['bay']
+        chk = request.form['chk']
+        # Servicing
+        watersvc = request.form['watersvc']
+        wastesvc = request.form['wastersvc']
+        afac = request.form['afac']
+        gpu = request.form['gpu']
+        asu = request.form['asu']
+        acu = request.form['acu']
+        brk = request.form['brk']
+        cherry = request.form['cherry']
+        platform = request.form['platform']
+        # Work Package & ADDs
+        pkg = request.form['pkg']
+        padd = request.form['padd']
+        sadd = request.form['sadd']
+        add = request.form['add']
+        zadd = request.form['zadd']
+        cadd = request.form['cadd']
+        madd = request.form['madd']
+        worked = request.form['work']
+        # Overnight
+        ovnbay = request.form['ovnbay']
+        tpc = request.form['tpc']
+        waterdrain = request.form['waterdrain']
+        wastedrain = request.form['wastedrain']
+        fueldrain = request.form['fueldrain']
+        stand = request.form['stand']
+        acwsh = request.form['acwsh']
+        # Handling By
+        mech1 = request.form['mech1']
+        mech2 = request.form['mech2']
+        eng = request.form['eic']
+        tda = request.form['tda']
+        # Flight remark
+        fltrmk = request.form['fltrmk']
+        record = request.form['record']
+        with conn:
+            conn.ping(reconnect=True)
+            cur = conn.cursor()
+            sql = query.update
+            cur.execute(sql, (arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk,
+                              watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, int(pkg), int(padd),
+                              int(sadd), int(add),
+                              int(zadd), int(cadd), int(madd), int(worked), ovnbay, tpc, waterdrain, wastedrain,
+                              fueldrain, stand, acwsh,
+                              mech1, mech2, eng, tda, fltrmk, record, fltid))
+            conn.commit()
+        return redirect(url_for('flight_log'))
+
+
+@app.route('/flight_log')
+def flight_log():
+    with conn:
+        conn.ping(reconnect=True)
+        cur = conn.cursor()
+        cur.execute(query.flight_log)
+        data = cur.fetchall()
+        return render_template('flight_log.html', title='Flight Log', data=data)
 
 
 if __name__ == "__main__":
