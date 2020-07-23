@@ -2,11 +2,12 @@
 
 {% block content %}
     <div class="container" style="min-width: 90%">
-        <h4 class="text-center m-3">Recently Added</h4>
+{#        <h4 class="text-center m-3">Flight</h4>#}
+        <a href="{{ url_for('create') }}" class="btn btn-info my-3 ">Add Flight</a>
         <table class="table table-sm table-striped table-responsive-sm mt-3" id="flightTable">
             <thead class="thead-dark">
             <tr>
-{#                <th>ID</th>#}
+                <th>ID</th>
                 <th>DATE</th>
                 <th>AIRLINE</th>
                 <th>FLT NO.</th>
@@ -29,19 +30,20 @@
                     {% endfor %}
                     <td><a href="" class="btn btn-sm btn-secondary">View</a></td>
                     <td><a href="" class="btn btn-sm btn-info">Update</a></td>
-                    <td><a href="" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td><a href="" class="btn btn-sm btn-danger disabled">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-        <a href="{{ url_for('create') }}" class="btn btn-success btn-sm">Add Flight</a>
     </div>
 {% endblock %}
 
 {% block script %}
     <script>
         $(document).ready(function () {
-            $("#flightTable").DataTable();
+            $("#flightTable").DataTable({
+                "order": [[0, "desc"]],
+            });
         });
     </script>
 {% endblock script %}

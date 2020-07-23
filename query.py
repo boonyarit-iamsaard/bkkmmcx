@@ -130,9 +130,9 @@ insert = """INSERT INTO flight (fltid, arrdate, airline, fltno, prefix, acreg, a
     mech1, mech2, eng, tda, fltrmk, record) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
     %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
 
-recently = """SELECT arrdate, airline, fltno, prefix, acreg, TIME_FORMAT(ata, '%H:%i'), TIME_FORMAT(atd, '%H:%i'), bay, chk 
+recently = """SELECT fltid, DATE_FORMAT(arrdate, '%d %b %y'), airline, fltno, prefix, acreg, TIME_FORMAT(ata, '%H:%i'), TIME_FORMAT(atd, '%H:%i'), bay, chk 
     FROM flight
     ORDER BY fltid DESC
-    LIMIT 100"""
+    LIMIT 300"""
 
 last = "SELECT fltid FROM flight ORDER BY fltid DESC LIMIT 1"
