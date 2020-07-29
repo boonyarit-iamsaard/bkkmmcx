@@ -1,4 +1,4 @@
-totalflt = """SELECT COALESCE(airline, 'TOTAL'),
+total_flt = """SELECT COALESCE(airline, 'TOTAL'),
             COUNT(CASE WHEN MONTH(arrdate) = 1 THEN airline END) AS 'JAN',
             COUNT(CASE WHEN MONTH(arrdate) = 2 THEN airline END) AS 'FEB',
             COUNT(CASE WHEN MONTH(arrdate) = 3 THEN airline END) AS 'MAR',
@@ -17,7 +17,7 @@ totalflt = """SELECT COALESCE(airline, 'TOTAL'),
             GROUP BY airline
             WITH ROLLUP"""
 
-totalChk = """SELECT airline, chk, 
+report_chk = """SELECT airline, chk, 
             COUNT(CASE WHEN MONTH(arrdate) = 1 THEN chk END) AS 'JAN',
             COUNT(CASE WHEN MONTH(arrdate) = 2 THEN chk END) AS 'FEB',
             COUNT(CASE WHEN MONTH(arrdate) = 3 THEN chk END) AS 'MAR',
@@ -33,7 +33,7 @@ totalChk = """SELECT airline, chk,
             FROM flight 
             GROUP BY airline, chk"""
 
-totalOvn = """SELECT airline, 
+total_ovn = """SELECT COALESCE(airline, 'TOTAL'), 
             COUNT(CASE WHEN MONTH(arrdate) = 1 THEN chk END) AS 'JAN',
             COUNT(CASE WHEN MONTH(arrdate) = 2 THEN chk END) AS 'FEB',
             COUNT(CASE WHEN MONTH(arrdate) = 3 THEN chk END) AS 'MAR',
@@ -45,10 +45,12 @@ totalOvn = """SELECT airline,
             COUNT(CASE WHEN MONTH(arrdate) = 9 THEN chk END) AS 'SEP',
             COUNT(CASE WHEN MONTH(arrdate) = 10 THEN chk END) AS 'OCT',
             COUNT(CASE WHEN MONTH(arrdate) = 11 THEN chk END) AS 'NOV',
-            COUNT(CASE WHEN MONTH(arrdate) = 12 THEN chk END) AS 'DEC'
+            COUNT(CASE WHEN MONTH(arrdate) = 12 THEN chk END) AS 'DEC',
+            COUNT(airline) AS 'TOTAL'
             FROM flight 
             WHERE ata IS NOT NULL AND atd IS NULL AND chk != 'RTB' 
-            GROUP BY airline"""
+            GROUP BY airline
+            WITH ROLLUP"""
 
 add = """SELECT DATE_FORMAT(arrdate, '%M'), 
     SUM(padd) AS "PADD", 
@@ -78,7 +80,7 @@ wy = """SELECT COALESCE(airline, 'TOTAL'),
         GROUP BY airline
         WITH ROLLUP"""
 
-addclrd = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '1',
+add_clrd = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '1',
     SUM(CASE WHEN MONTH(arrdate) = 2 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '2',
     SUM(CASE WHEN MONTH(arrdate) = 3 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '3',
     SUM(CASE WHEN MONTH(arrdate) = 4 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '4',
@@ -92,7 +94,7 @@ addclrd = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN padd+sadd+`add`+zadd+c
     SUM(CASE WHEN MONTH(arrdate) = 12 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '12'
     FROM flight"""
 
-addworked = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN worked ELSE 0 END) AS '1',
+add_worked = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN worked ELSE 0 END) AS '1',
     SUM(CASE WHEN MONTH(arrdate) = 2 THEN worked ELSE 0 END) AS '2',
     SUM(CASE WHEN MONTH(arrdate) = 3 THEN worked ELSE 0 END) AS '3',
     SUM(CASE WHEN MONTH(arrdate) = 4 THEN worked ELSE 0 END) AS '4',
@@ -140,5 +142,49 @@ flight_log = """SELECT fltid, DATE_FORMAT(arrdate, '%d %b %y'), airline, fltno, 
     FROM flight
     ORDER BY fltid DESC
     LIMIT 300"""
+
+count_h2osvc = """SELECT airline,
+       COUNT(CASE WHEN MONTH(arrdate) = 1 THEN watersvc END)  AS 'JAN',
+       COUNT(CASE WHEN MONTH(arrdate) = 2 THEN watersvc END)  AS 'FEB',
+       COUNT(CASE WHEN MONTH(arrdate) = 3 THEN watersvc END)  AS 'MAR',
+       COUNT(CASE WHEN MONTH(arrdate) = 4 THEN watersvc END)  AS 'APR',
+       COUNT(CASE WHEN MONTH(arrdate) = 5 THEN watersvc END)  AS 'MAY',
+       COUNT(CASE WHEN MONTH(arrdate) = 6 THEN watersvc END)  AS 'JUN',
+       COUNT(CASE WHEN MONTH(arrdate) = 7 THEN watersvc END)  AS 'JUL',
+       COUNT(CASE WHEN MONTH(arrdate) = 8 THEN watersvc END)  AS 'AUG',
+       COUNT(CASE WHEN MONTH(arrdate) = 9 THEN watersvc END)  AS 'SEP',
+       COUNT(CASE WHEN MONTH(arrdate) = 10 THEN watersvc END) AS 'OCT',
+       COUNT(CASE WHEN MONTH(arrdate) = 11 THEN watersvc END) AS 'NOV',
+       COUNT(CASE WHEN MONTH(arrdate) = 12 THEN watersvc END) AS 'DEC'
+FROM flight
+WHERE watersvc = 'YES'
+GROUP BY airline"""
+
+detail_h2osvc = """SELECT fltid, arrdate, airline, fltno, prefix, acreg, bay, watersvc
+FROM flight
+WHERE watersvc = 'YES'
+ORDER BY fltid DESC"""
+
+count_wastesvc = """SELECT airline,
+       COUNT(CASE WHEN MONTH(arrdate) = 1 THEN watersvc END)  AS 'JAN',
+       COUNT(CASE WHEN MONTH(arrdate) = 2 THEN watersvc END)  AS 'FEB',
+       COUNT(CASE WHEN MONTH(arrdate) = 3 THEN watersvc END)  AS 'MAR',
+       COUNT(CASE WHEN MONTH(arrdate) = 4 THEN watersvc END)  AS 'APR',
+       COUNT(CASE WHEN MONTH(arrdate) = 5 THEN watersvc END)  AS 'MAY',
+       COUNT(CASE WHEN MONTH(arrdate) = 6 THEN watersvc END)  AS 'JUN',
+       COUNT(CASE WHEN MONTH(arrdate) = 7 THEN watersvc END)  AS 'JUL',
+       COUNT(CASE WHEN MONTH(arrdate) = 8 THEN watersvc END)  AS 'AUG',
+       COUNT(CASE WHEN MONTH(arrdate) = 9 THEN watersvc END)  AS 'SEP',
+       COUNT(CASE WHEN MONTH(arrdate) = 10 THEN watersvc END) AS 'OCT',
+       COUNT(CASE WHEN MONTH(arrdate) = 11 THEN watersvc END) AS 'NOV',
+       COUNT(CASE WHEN MONTH(arrdate) = 12 THEN watersvc END) AS 'DEC'
+FROM flight
+WHERE wastesvc = 'YES'
+GROUP BY airline"""
+
+detail_wastesvc = """SELECT fltid, arrdate, airline, fltno, prefix, acreg, bay, wastesvc
+FROM flight
+WHERE wastesvc = 'YES'
+ORDER BY fltid DESC"""
 
 last = "SELECT fltid FROM flight ORDER BY fltid DESC LIMIT 1"

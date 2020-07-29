@@ -2,7 +2,6 @@
 
 {% block content %}
     <div class="container" style="min-width: 90%">
-{#        <h4 class="text-center m-3">Flight</h4>#}
         <a href="{{ url_for('create') }}" class="btn btn-info my-3 ">Add Flight</a>
         <table class="table table-sm table-striped table-responsive-sm mt-3" id="flightTable">
             <thead class="thead-dark">
@@ -18,7 +17,6 @@
                 <th>BAY</th>
                 <th>CHK</th>
                 <th></th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -27,8 +25,7 @@
                     {% for td in row %}
                         <td>{{ td }}</td>
                     {% endfor %}
-                    <td><a href="/details/{{ row.0 }}" class="btn btn-sm btn-info">Update</a></td>
-                    <td><a href="" class="btn btn-sm btn-danger disabled">Delete</a></td>
+                    <td><a href="/details/{{ row.0 }}" class="btn btn-sm btn-warning">Edit</a></td>
                 </tr>
             {% endfor %}
             </tbody>

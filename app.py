@@ -3,10 +3,12 @@ import pymysql
 import query
 
 app = Flask(__name__)
-conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
+# conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
 
 
-# conn = pymysql.connect("localhost", "root", "", "cxbkkeng")
+conn = pymysql.connect("localhost", "root", "22@Nov1985", "backup-bkkmmcx")
+
+
 # test push to develop branch again
 
 @app.route("/")
@@ -15,7 +17,7 @@ def dashboard():
         with conn:
             conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.execute(query.totalflt)
+            cur.execute(query.total_flt)
             total = cur.fetchall()
             return total
 
@@ -25,7 +27,7 @@ def dashboard():
         with conn:
             conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.execute(query.totalChk)
+            cur.execute(query.report_chk)
             airline = cur.fetchall()
             return airline
 
@@ -35,7 +37,7 @@ def dashboard():
         with conn:
             conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.execute(query.totalOvn)
+            cur.execute(query.total_ovn)
             totalovn = cur.fetchall()
             return totalovn
 
@@ -55,7 +57,7 @@ def dashboard():
         with conn:
             conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.execute(query.addclrd)
+            cur.execute(query.add_clrd)
             add = cur.fetchone()
             return add
 
@@ -65,7 +67,7 @@ def dashboard():
         with conn:
             conn.ping(reconnect=True)
             cur = conn.cursor()
-            cur.execute(query.addworked)
+            cur.execute(query.add_worked)
             totaladd = cur.fetchone()
             return totaladd
 
@@ -86,8 +88,8 @@ def dashboard():
     # ovn = data.2
     # wy = data.3
     # pkgadd = data.4
-    # addclrd = data.5
-    # addworked = data.6
+    # add_clrd = data.5
+    # add_worked = data.6
     # pkg = data.7
     data = (flight, check, ovn, wy, totaladdclrd, totaladdworked, pkg)
     return render_template("dashboard.html", title='Dashboard', data=data)
@@ -174,7 +176,6 @@ def insert():
             cur.execute(query.last)
             last = cur.fetchone()
             last = last[0] + 1
-            print(last)
             sql = query.insert
             cur.execute(sql, (last, arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk,
                               watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, int(pkg), int(padd),
@@ -193,7 +194,12 @@ def details(id_data):
         cur = conn.cursor()
         cur.execute('SELECT * FROM flight WHERE fltid=%s', id_data)
         update_flight = cur.fetchone()
-        return render_template('details.html', data=update_flight)
+        cur.execute(query.staff)
+        namelist = cur.fetchall()
+        cur.execute(query.eic)
+        eic = cur.fetchall()
+        data = (update_flight, namelist, eic)
+        return render_template('update.html', title='Update', data=data)
 
 
 @app.route('/update/<string:id_data>', methods=['POST'])
@@ -267,6 +273,49 @@ def flight_log():
         cur.execute(query.flight_log)
         data = cur.fetchall()
         return render_template('flight_log.html', title='Flight Log', data=data)
+
+
+@app.route('/report_chk')
+def report_chk():
+    with conn:
+        conn.ping(reconnect=True)
+        cur = conn.cursor()
+        cur.execute(query.report_chk)
+        chk = cur.fetchall()
+        cur.execute('SELECT DISTINCT airline FROM flight ORDER BY airline')
+        airline = cur.fetchall()
+        data = (chk, airline)
+        return render_template('report_chk.html', title='Reports-Check', data=data)
+
+
+@app.route('/report_flt')
+def report_flt():
+    with conn:
+        conn.ping(reconnect=True)
+        cur = conn.cursor()
+        cur.execute(query.total_flt)
+        flt = cur.fetchall()
+        cur.execute(query.total_ovn)
+        ovn = cur.fetchall()
+        data = (flt, ovn)
+        return render_template('report_flt.html', title='Reports-Flight', data=data)
+
+
+@app.route('/report_svc')
+def report_svc():
+    with conn:
+        conn.ping(reconnect=True)
+        cur = conn.cursor()
+        cur.execute(query.count_h2osvc)
+        count = cur.fetchall()
+        cur.execute(query.detail_h2osvc)
+        detail = cur.fetchall()
+        cur.execute(query.count_wastesvc)
+        count2 = cur.fetchall()
+        cur.execute(query.detail_wastesvc)
+        detail2 = cur.fetchall()
+        data = (count, detail, count2, detail2)
+        return render_template('report_svc.html', title='Reports-Servicing', data=data)
 
 
 if __name__ == "__main__":

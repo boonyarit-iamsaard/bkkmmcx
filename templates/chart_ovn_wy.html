@@ -13,18 +13,18 @@
 
         let bgColor = [
             "rgba(255, 99, 132, 0.75)",
-            "rgba(54, 162, 235, 0.75)",
-            "rgba(255, 206, 86, 0.75)",
             "rgba(75, 192, 192, 0.75)",
+            "rgba(255, 206, 86, 0.75)",
+            "rgba(54, 162, 235, 0.75)",
             "rgba(153, 102, 255, 0.75)",
             "rgba(255, 159, 64, 0.75)",
         ];
 
         let bdColor = [
             "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
             "rgba(75, 192, 192, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(54, 162, 235, 1)",
             "rgba(153, 102, 255, 1)",
             "rgba(255, 159, 64, 1)",
         ];
@@ -36,35 +36,35 @@
         {% endfor %}
 
         let total = {
-            label: 'TOTAL : WY',
+            label: 'TOTAL | WY',
             data: totalWY,
             type: 'line',
             backgroundColor: "rgba(75, 192, 192, 0.1)",
             borderWidth: 1,
-            pointRadius: 2,
-            lineTension: 0,
+            pointRadius: 0,
+            lineTension: 0.4,
             yAxisID: 'second-y-axis'
         }
 
         let cx = {
-            label: 'CX : WY',
+            label: 'CX | WY',
             data: cxWY,
             type: 'line',
             backgroundColor: "rgba(255, 99, 132, 0.1)",
             borderWidth: 1,
-            pointRadius: 2,
-            lineTension: 0,
+            pointRadius: 0,
+            lineTension: 0.4,
             yAxisID: 'second-y-axis'
         }
 
         let ld = {
-            label: 'LD : WY',
+            label: 'LD | WY',
             data: ldWy,
             type: 'line',
             backgroundColor: "rgba(54, 162, 235, 0.2)",
             borderWidth: 1,
-            pointRadius: 2,
-            lineTension: 0,
+            pointRadius: 0,
+            lineTension: 0.4,
             yAxisID: 'second-y-axis'
         }
 
@@ -78,7 +78,7 @@
             airline.push('{{ data[2][a][0] }}')
         {% endfor %}
 
-        for (let i = 0; i < airline.length; i++) {
+        for (let i = 0; i < airline.length -1; i++) {
             c = {
                 label: airline[i],
                 data: ovn[i],
@@ -118,7 +118,7 @@
             options: {
                 title: {
                     display: true,
-                    text: 'Overnight : WY',
+                    text: 'Overnight | WY',
                     fontFamily: "'IBM Plex Sans', sans-serif",
                     fontSize: 20,
                     fontColor: '#000',
@@ -127,7 +127,10 @@
                 scales: {
                     yAxes: [{
                         id: 'first-y-axis',
-                        position: 'left'
+                        position: 'left',
+                        gridLines: {
+                            display: false
+                        }
                     }, {
                         id: 'second-y-axis',
                         display: true,
@@ -136,6 +139,11 @@
                             display: false
                         }
                     }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                    }]
                 },
 
             }

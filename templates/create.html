@@ -19,7 +19,7 @@
                                     <input
                                             type="date"
                                             name="arrdate"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm border-danger"
                                             id="arrdate"
                                             autocomplete="off"
                                             required
@@ -31,9 +31,10 @@
                                     <select
                                             name="airline"
                                             id="airline"
-                                            class="form-control form-control-sm required"
+                                            class="form-control form-control-sm required border-danger"
                                     >
-                                        <option value="CX">CX</option>
+                                        <option value="ASL">ASL</option>
+                                        <option value="CX" selected>CX</option>
                                         <option value="KA">KA</option>
                                         <option value="LD">LD</option>
                                         <option value="PR">PR</option>
@@ -45,7 +46,7 @@
                                     <input
                                             list="fltlist"
                                             name="fltno"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm border-danger"
                                             id="fltno"
                                             required
                                     />
@@ -66,7 +67,7 @@
                                     <select
                                             name="prefix"
                                             id="prefix"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm border-danger"
                                             required
                                     >
                                         <option value="B-">B-</option>
@@ -79,7 +80,7 @@
                                     <input
                                             type="text"
                                             name="acreg"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm border-danger"
                                             id="acreg"
                                             required
                                     />
@@ -110,7 +111,7 @@
                                     <input
                                             type="text"
                                             name="bay"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm border-danger"
                                             id="bay"
                                             required
                                     />
@@ -120,7 +121,7 @@
                                     <input
                                             type="text"
                                             name="chk"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm border-danger"
                                             id="chk"
                                             required
                                     />
@@ -491,7 +492,7 @@
                                     <input
                                             list="mechlist"
                                             name="mech1"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm border-danger"
                                             id="mech1"
                                             size="4"
                                             required
@@ -531,7 +532,7 @@
                                     <input
                                             list="eiclist"
                                             name="eic"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm border-danger"
                                             id="eic"
                                             size="4"
                                             required
@@ -589,7 +590,7 @@
                                     <input
                                             list="namelist"
                                             name="record"
-                                            class="form-control"
+                                            class="form-control border-danger"
                                             id="record"
                                             required
                                     />
@@ -607,7 +608,7 @@
                     <div class="row">
                         <div class="col">
                             <button
-                                    class="btn btn-primary btn-block border border-light"
+                                    class="btn btn-info btn-block border border-light"
                                     type="submit"
                             >
                                 Add Flight

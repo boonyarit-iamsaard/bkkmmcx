@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
     <div class="container py-3">
-        <form id="myForm" action="/update/{{ data.0 }}" method="post">
+        <form id="myForm" action="/update/{{ data[0][0] }}" method="post">
             <!-- Flight Log -->
             <div class="row">
                 <div class="col px-2">
@@ -19,10 +18,10 @@
                                     <input
                                         type="date"
                                         name="arrdate"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm border-danger"
                                         id="arrdate"
-                                        autocomplete="off"
-                                        value="{{ data.1 }}"
+                                        autocomplete="on"
+                                        value="{{ data[0][1] }}"
                                         required
                                     />
                                 </div>
@@ -32,9 +31,10 @@
                                     <select
                                         name="airline"
                                         id="airline"
-                                        class="form-control form-control-sm required"
+                                        class="form-control form-control-sm required border-danger"
                                     >
-                                        <option value="{{ data.2 }}">{{ data.2 }}</option>
+                                        <option value="{{ data[0][2] }}">{{ data[0][2] }}</option>
+                                        <option value="ASL">ASL</option>
                                         <option value="CX">CX</option>
                                         <option value="KA">KA</option>
                                         <option value="LD">LD</option>
@@ -47,9 +47,9 @@
                                     <input
                                         list="fltlist"
                                         name="fltno"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm border-danger"
                                         id="fltno"
-                                        value="{{ data.3 }}"
+                                        value="{{ data[0][3] }}"
                                         required
                                     />
                                     <datalist id="fltlist">
@@ -69,10 +69,10 @@
                                     <select
                                         name="prefix"
                                         id="prefix"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm border-danger"
                                         required
                                     >
-                                        <option value="{{ data.4 }}">{{ data.4 }}</option>
+                                        <option value="{{ data[0][4] }}">{{ data[0][4] }}</option>
                                         <option value="B-">B-</option>
                                         <option value="B-">B-</option>
                                         <option value="EI-">EI-</option>
@@ -84,9 +84,9 @@
                                     <input
                                         type="text"
                                         name="acreg"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm border-danger"
                                         id="acreg"
-                                        value="{{ data.5 }}"
+                                        value="{{ data[0][5] }}"
                                         required
                                     />
                                 </div>
@@ -98,9 +98,9 @@
                                     <input
                                         type="time"
                                         name="ata"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm timepicker"
                                         id="ata"
-                                        value="{{ data.6 }}"
+                                        value="{{ data[0][6] }}"
                                     />
                                 </div>
                                 <div class="col-md-2 col-form-label col-form-label-sm">
@@ -108,9 +108,9 @@
                                     <input
                                         type="time"
                                         name="atd"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm timepicker"
                                         id="atd"
-                                        value="{{ data.7 }}"
+                                        value="{{ data[0][7] }}"
                                     />
                                 </div>
                                 <div class="col-md-2 col-form-label col-form-label-sm">
@@ -118,9 +118,9 @@
                                     <input
                                         type="text"
                                         name="bay"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm border-danger"
                                         id="bay"
-                                        value="{{ data.8 }}"
+                                        value="{{ data[0][8] }}"
                                         required
                                     />
                                 </div>
@@ -129,9 +129,9 @@
                                     <input
                                         type="text"
                                         name="chk"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm border-danger"
                                         id="chk"
-                                        value="{{ data.9 }}"
+                                        value="{{ data[0][9] }}"
                                         required
                                     />
                                 </div>
@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="watersvc" class="form-control form-control-sm" id="watersvc">
-                                        <option value="{{ data.10 }}">{{ data.10 }}</option>
+                                        <option value="{{ data[0][10] }}">{{ data[0][10] }}</option>
                                         <option value="YES">YES</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -170,7 +170,7 @@
                                         class="form-control form-control-sm"
                                         id="wastersvc"
                                     >
-                                        <option value="{{ data.11 }}">{{ data.11 }}</option>
+                                        <option value="{{ data[0][11] }}">{{ data[0][11] }}</option>
                                         <option value="YES">YES</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -186,7 +186,7 @@
                                         name="afac"
                                         class="form-control form-control-sm"
                                         id="afac"
-                                        value="{{ data.12 }}"
+                                        value="{{ data[0][12] }}"
                                         placeholder="minutes"
                                     />
                                 </div>
@@ -197,7 +197,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="gpu" class="form-control form-control-sm" id="gpu">
-                                        <option value="{{ data.13 }}">{{ data.13 }}</option>
+                                        <option value="{{ data[0][13] }}">{{ data[0][13] }}</option>
                                         <option value="BFS">BFS</option>
                                         <option value="TG">TG</option>
                                         <option value="NO">NO</option>
@@ -210,7 +210,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="asu" class="form-control form-control-sm" id="asu">
-                                        <option value="{{ data.14 }}">{{ data.14 }}</option>
+                                        <option value="{{ data[0][14] }}">{{ data[0][14] }}</option>
                                         <option value="BFS">BFS</option>
                                         <option value="TG">TG</option>
                                         <option value="NO">NO</option>
@@ -223,7 +223,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="acu" class="form-control form-control-sm" id="acu">
-                                        <option value="{{ data.15 }}">{{ data.15 }}</option>
+                                        <option value="{{ data[0][15] }}">{{ data[0][15] }}</option>
                                         <option value="BFS">BFS</option>
                                         <option value="TG">TG</option>
                                         <option value="NO">NO</option>
@@ -236,7 +236,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="brk" class="form-control form-control-sm" id="brk">
-                                        <option value="{{ data.16 }}">{{ data.16 }}</option>
+                                        <option value="{{ data[0][16] }}">{{ data[0][16] }}</option>
                                         <option value="BFS">BFS</option>
                                         <option value="TG">TG</option>
                                         <option value="NO">NO</option>
@@ -249,7 +249,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="cherry" class="form-control form-control-sm" id="cherry">
-                                        <option value="{{ data.17 }}">{{ data.17 }}</option>
+                                        <option value="{{ data[0][17] }}">{{ data[0][17] }}</option>
                                         <option value="BFS">BFS</option>
                                         <option value="TG">TG</option>
                                         <option value="NO">NO</option>
@@ -262,7 +262,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="platform" class="form-control form-control-sm" id="platform">
-                                        <option value="{{ data.18 }}">{{ data.18 }}</option>
+                                        <option value="{{ data[0][18] }}">{{ data[0][18] }}</option>
                                         <option value="BFS">BFS</option>
                                         <option value="TG">TG</option>
                                         <option value="NO">NO</option>
@@ -289,7 +289,7 @@
                                         name="pkg"
                                         class="form-control form-control-sm"
                                         id="pkg"
-                                        value="{{ data.19 }}"
+                                        value="{{ data[0][19] }}"
 
                                     />
                                 </div>
@@ -304,7 +304,7 @@
                                         name="padd"
                                         class="form-control form-control-sm"
                                         id="padd"
-                                        value="{{ data.20 }}"
+                                        value="{{ data[0][20] }}"
                                     />
                                 </div>
                             </div>
@@ -318,7 +318,7 @@
                                         name="sadd"
                                         class="form-control form-control-sm"
                                         id="sadd"
-                                        value="{{ data.21 }}"
+                                        value="{{ data[0][21] }}"
                                     />
                                 </div>
                             </div>
@@ -332,7 +332,7 @@
                                         name="add"
                                         class="form-control form-control-sm"
                                         id="add"
-                                        value="{{ data.22 }}"
+                                        value="{{ data[0][22] }}"
                                     />
                                 </div>
                             </div>
@@ -346,7 +346,7 @@
                                         name="zadd"
                                         class="form-control form-control-sm"
                                         id="zadd"
-                                        value="{{ data.23 }}"
+                                        value="{{ data[0][23] }}"
                                     />
                                 </div>
                             </div>
@@ -360,7 +360,7 @@
                                         name="cadd"
                                         class="form-control form-control-sm"
                                         id="cadd"
-                                        value="{{ data.24 }}"
+                                        value="{{ data[0][24] }}"
                                     />
                                 </div>
                             </div>
@@ -374,7 +374,7 @@
                                         name="madd"
                                         class="form-control form-control-sm"
                                         id="madd"
-                                        value="{{ data.25 }}"
+                                        value="{{ data[0][25] }}"
                                     />
                                 </div>
                             </div>
@@ -388,7 +388,7 @@
                                         name="work"
                                         class="form-control form-control-sm"
                                         id="work"
-                                        value="{{ data.26 }}"
+                                        value="{{ data[0][26] }}"
                                     />
                                 </div>
                             </div>
@@ -412,7 +412,7 @@
                                         name="ovnbay"
                                         class="form-control form-control-sm"
                                         id="ovnbay"
-                                        value="{{ data.27 }}"
+                                        value="{{ data[0][27] }}"
                                     />
                                 </div>
                             </div>
@@ -422,7 +422,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="tpc" class="form-control form-control-sm" id="tpc">
-                                        <option value="{{ data.28 }}">{{ data.28 }}</option>
+                                        <option value="{{ data[0][28] }}">{{ data[0][28] }}</option>
                                         <option value="YES">YES</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -438,7 +438,7 @@
                                         class="form-control form-control-sm"
                                         id="waterdrain"
                                     >
-                                        <option value="{{ data.29 }}">{{ data.29 }}</option>
+                                        <option value="{{ data[0][29] }}">{{ data[0][29] }}</option>
                                         <option value="YES">YES</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -454,7 +454,7 @@
                                         class="form-control form-control-sm"
                                         id="wastedrain"
                                     >
-                                        <option value="{{ data.30 }}">{{ data.30 }}</option>
+                                        <option value="{{ data[0][30] }}">{{ data[0][30] }}</option>
                                         <option value="YES">YES</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -470,7 +470,7 @@
                                         class="form-control form-control-sm"
                                         id="fueldrain"
                                     >
-                                        <option value="{{ data.31 }}">{{ data.31 }}</option>
+                                        <option value="{{ data[0][31] }}">{{ data[0][31] }}</option>
                                         <option value="YES">YES</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -482,7 +482,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="stand" class="form-control form-control-sm" id="stand">
-                                        <option value="{{ data.32 }}">{{ data.32 }}</option>
+                                        <option value="{{ data[0][32] }}">{{ data[0][32] }}</option>
                                         <option value="YES">YES</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -494,7 +494,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="acwsh" class="form-control form-control-sm" id="acwsh">
-                                        <option value="{{ data.33 }}">{{ data.33 }}</option>
+                                        <option value="{{ data[0][33] }}">{{ data[0][33] }}</option>
                                         <option value="YES">YES</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -518,10 +518,10 @@
                                     <input
                                         list="mechlist"
                                         name="mech1"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm border-danger"
                                         id="mech1"
                                         size="4"
-                                        value="{{ data.34 }}"
+                                        value="{{ data[0][34] }}"
                                         required
                                     />
                                     <datalist id="mechlist">
@@ -542,7 +542,7 @@
                                         name="mech2"
                                         class="form-control form-control-sm"
                                         id="mech2"
-                                        value="{{ data.35 }}"
+                                        value="{{ data[0][35] }}"
                                         size="4"
                                     />
                                     <datalist id="mechlist">
@@ -560,16 +560,16 @@
                                     <input
                                         list="eiclist"
                                         name="eic"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm border-danger"
                                         id="eic"
                                         size="4"
-                                        value="{{ data.36 }}"
+                                        value="{{ data[0][36] }}"
                                         required
                                     />
                                     <datalist id="eiclist">
-                                        {#                                        {% for eic in data.1 %}#}
-                                        {#                                            <option value={{ eic.0 }}>{{ eic.0 }}</option>#}
-                                        {#                                        {% endfor %}#}
+                                        {% for eic in data[2] %}
+                                            <option value={{ eic.0 }}>{{ eic.0 }}</option>
+                                        {% endfor %}
                                     </datalist>
                                 </div>
                             </div>
@@ -583,7 +583,7 @@
                                         name="tda"
                                         class="form-control form-control-sm"
                                         id="tda"
-                                        value="{{ data.37 }}"
+                                        value="{{ data[0][37] }}"
                                     />
                                 </div>
                             </div>
@@ -607,7 +607,7 @@
                                         name="fltrmk"
                                         class="form-control"
                                         id="fltrmk"
-                                        value="{{ data.38 }}"
+                                        value="{{ data[0][38] }}"
                                         cols="50"
                                         rows="5"
                                     ></textarea>
@@ -621,16 +621,16 @@
                                     <input
                                         list="namelist"
                                         name="record"
-                                        class="form-control"
+                                        class="form-control border-danger"
                                         id="record"
-                                        value="{{ data.39 }}"
+                                        value="{{ data[0][39] }}"
                                         required
                                     />
                                 </div>
                                 <datalist id="namelist">
-                                    {#                                    {% for namelist in data.0 %}#}
-                                    {#                                        <option value={{ namelist.0 }}>{{ namelist.0 }}</option>#}
-                                    {#                                    {% endfor %}#}
+                                    {% for namelist in data[1] %}
+                                        <option value={{ namelist.0 }}>{{ namelist.0 }}</option>
+                                    {% endfor %}
                                 </datalist>
                             </div>
                         </div>
@@ -643,7 +643,7 @@
                                 class="btn btn-info btn-block border border-light"
                                 type="submit"
                             >
-                                Update
+                                Edit
                             </button>
                         </div>
                     </div>
@@ -652,4 +652,10 @@
         </form>
     </div>
 
+{% endblock %}
+
+{% block script %}
+    <script>
+
+    </script>
 {% endblock %}
