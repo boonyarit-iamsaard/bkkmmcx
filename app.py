@@ -3,10 +3,10 @@ import pymysql
 import query
 
 app = Flask(__name__)
-conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
+# conn = pymysql.connect("us-cdbr-east-05.cleardb.net", "b02b9837c2f815", "1628b5ed", "heroku_13912b51418014f")
 
 
-# conn = pymysql.connect("localhost", "root", "22@Nov1985", "backup-bkkmmcx")
+conn = pymysql.connect("localhost", "root", "22@Nov1985", "backup-bkkmmcx")
 
 
 # test push to develop branch again
@@ -318,5 +318,5 @@ def report_svc():
         return render_template('report_svc.html', title='Reports-Servicing', data=data)
 
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
