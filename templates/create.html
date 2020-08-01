@@ -15,13 +15,14 @@
                             <div class="row">
                                 <!-- Date -->
                                 <div class="col-md-4 col-form-label col-form-label-sm">
-                                    <label for="date">Date</label>
+                                    <label for="arrdate">Date</label>
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="arrdate"
-                                        class="form-control form-control-sm border-danger"
+                                        class="form-control form-control-sm border-danger datepicker"
                                         id="arrdate"
                                         autocomplete="off"
+                                        placeholder="dd/mm/yyyy"
                                         required
                                     />
                                 </div>
@@ -49,6 +50,7 @@
                                         class="form-control form-control-sm border-danger"
                                         id="fltno"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                     <datalist id="fltlist">
                                         <option value="613"></option>
@@ -83,6 +85,7 @@
                                         class="form-control form-control-sm border-danger"
                                         id="acreg"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                             </div>
@@ -95,7 +98,9 @@
                                         name="ata"
                                         class="form-control form-control-sm timepicker"
                                         id="ata"
-                                        placeholder="hh:mm"
+                                        placeholder="hhmm"
+                                        pattern="[0-9]{4}"
+                                        title="Please input 4 digits of number"
                                     />
                                 </div>
                                 <div class="col-md-2 col-form-label col-form-label-sm">
@@ -105,7 +110,9 @@
                                         name="atd"
                                         class="form-control form-control-sm timepicker"
                                         id="atd"
-                                        placeholder="hh:mm"
+                                        placeholder="hhmm"
+                                        pattern="[0-9]{4}"
+                                        title="Please input 4 digits of number"
                                     />
                                 </div>
                                 <div class="col-md-2 col-form-label col-form-label-sm">
@@ -116,6 +123,7 @@
                                         class="form-control form-control-sm border-danger"
                                         id="bay"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                                 <div class="col-md-2 col-form-label col-form-label-sm">
@@ -126,6 +134,7 @@
                                         class="form-control form-control-sm border-danger"
                                         id="chk"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                             </div>
@@ -395,6 +404,7 @@
                                         name="ovnbay"
                                         class="form-control form-control-sm"
                                         id="ovnbay"
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                             </div>
@@ -498,6 +508,7 @@
                                         id="mech1"
                                         size="4"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                     <datalist id="mechlist">
                                         <option value="AD">AD</option>
@@ -509,7 +520,7 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-6 col-form-label col-form-label-sm">
-                                    <label for="mech-2">MECH-2</label>
+                                    <label for="mech2">MECH-2</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input
@@ -518,6 +529,7 @@
                                         class="form-control form-control-sm"
                                         id="mech2"
                                         size="4"
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                     <datalist id="mechlist">
                                         <option value="M4"></option>
@@ -538,6 +550,7 @@
                                         id="eic"
                                         size="4"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                     <datalist id="eiclist">
                                         {% for eic in data.1 %}
@@ -552,10 +565,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input
-                                        type="time"
+                                        type="text"
                                         name="tda"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm timepicker"
                                         id="tda"
+                                        placeholder="hhmm"
+                                        pattern="[0-9]{4}"
                                     />
                                 </div>
                             </div>
@@ -569,7 +584,7 @@
                     <div class="card bg-light text-dark h-100 shadow-sm">
                         <div class="card-header">
                             <p class="text-center text-dark mb-0">
-                                Flight Remark
+                                <label for="fltrmk">Flight Remark</label>
                             </p>
                         </div>
                         <div class="card-body px-3">
@@ -581,6 +596,7 @@
                         id="fltrmk"
                         cols="50"
                         rows="5"
+                        onkeyup="this.value = this.value.toUpperCase();"
                     ></textarea>
                                 </div>
                             </div>
@@ -595,6 +611,7 @@
                                         class="form-control border-danger"
                                         id="record"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                                 <datalist id="namelist">
