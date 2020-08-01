@@ -198,7 +198,11 @@ def details(id_data):
         namelist = cur.fetchall()
         cur.execute(query.eic)
         eic = cur.fetchall()
-        data = (update_flight, namelist, eic)
+        cur.execute(
+            f"SELECT DATE_FORMAT(arrdate, '%d/%m/%Y'),TIME_FORMAT(ata, '%H:%i'), TIME_FORMAT(atd, '%H:%i') "
+            f"FROM flight WHERE fltid={id_data}")
+        datetime = cur.fetchone()
+        data = (update_flight, namelist, eic, datetime)
         return render_template('update.html', title='Update', data=data)
 
 
@@ -318,5 +322,5 @@ def report_svc():
         return render_template('report_svc.html', title='Reports-Servicing', data=data)
 
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
