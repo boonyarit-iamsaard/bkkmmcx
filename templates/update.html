@@ -16,11 +16,12 @@
                                 <div class="col-md-4 col-form-label col-form-label-sm">
                                     <label for="arrdate">Date</label>
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="arrdate"
-                                        class="form-control form-control-sm border-danger"
+                                        class="form-control form-control-sm border-danger datepicker"
                                         id="arrdate"
-                                        autocomplete="on"
+                                        autocomplete="off"
+                                        placeholder="dd/mm/yyyy"
                                         value="{{ data[0][1] }}"
                                         required
                                     />
@@ -51,6 +52,7 @@
                                         id="fltno"
                                         value="{{ data[0][3] }}"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                     <datalist id="fltlist">
                                         <option value="613"></option>
@@ -88,6 +90,7 @@
                                         id="acreg"
                                         value="{{ data[0][5] }}"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                             </div>
@@ -96,21 +99,25 @@
                                 <div class="col-md-2 col-form-label col-form-label-sm">
                                     <label for="ata">ATA</label>
                                     <input
-                                        type="time"
+                                        type="text"
                                         name="ata"
                                         class="form-control form-control-sm timepicker"
                                         id="ata"
-                                        value="{{ data[0][6] }}"
+                                        value="{{ "%H:%M"|format(data[0][6]) }}"
+                                        placeholder="hhmm"
+                                        pattern="[0-9][0-9]:[0-9][0-9]"
                                     />
                                 </div>
                                 <div class="col-md-2 col-form-label col-form-label-sm">
                                     <label for="atd">ATD</label>
                                     <input
-                                        type="time"
-                                        name="atd"
+                                        type="text"
+                                        name="text"
                                         class="form-control form-control-sm timepicker"
                                         id="atd"
-                                        value="{{ data[0][7] }}"
+                                        value="{{ "%H:%M"|format(data[0][7]) }}"
+                                        placeholder="hhmm"
+                                        pattern="[0-9][0-9]:[0-9][0-9]"
                                     />
                                 </div>
                                 <div class="col-md-2 col-form-label col-form-label-sm">
@@ -122,6 +129,7 @@
                                         id="bay"
                                         value="{{ data[0][8] }}"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                                 <div class="col-md-2 col-form-label col-form-label-sm">
@@ -133,6 +141,7 @@
                                         id="chk"
                                         value="{{ data[0][9] }}"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                             </div>
@@ -413,6 +422,7 @@
                                         class="form-control form-control-sm"
                                         id="ovnbay"
                                         value="{{ data[0][27] }}"
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                             </div>
@@ -523,6 +533,7 @@
                                         size="4"
                                         value="{{ data[0][34] }}"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                     <datalist id="mechlist">
                                         <option value="AD">AD</option>
@@ -543,6 +554,7 @@
                                         class="form-control form-control-sm"
                                         id="mech2"
                                         value="{{ data[0][35] }}"
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                         size="4"
                                     />
                                     <datalist id="mechlist">
@@ -565,6 +577,7 @@
                                         size="4"
                                         value="{{ data[0][36] }}"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                     <datalist id="eiclist">
                                         {% for eic in data[2] %}
@@ -579,11 +592,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input
-                                        type="time"
+                                        type="text"
                                         name="tda"
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm timepicker"
                                         id="tda"
                                         value="{{ data[0][37] }}"
+                                        placeholder="hhmm"
+                                        pattern="[0-9][0-9]:[0-9][0-9]"
                                     />
                                 </div>
                             </div>
@@ -610,6 +625,7 @@
                                         value="{{ data[0][38] }}"
                                         cols="50"
                                         rows="5"
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     ></textarea>
                                 </div>
                             </div>
@@ -625,6 +641,7 @@
                                         id="record"
                                         value="{{ data[0][39] }}"
                                         required
+                                        onkeyup="this.value = this.value.toUpperCase();"
                                     />
                                 </div>
                                 <datalist id="namelist">
