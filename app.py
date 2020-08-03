@@ -3,15 +3,15 @@ import pymysql
 import query
 
 app = Flask(__name__)
-# conn = pymysql.connect(
-#     "us-cdbr-east-05.cleardb.net",
-#     "b02b9837c2f815",
-#     "1628b5ed",
-#     "heroku_13912b51418014f",
-# )
+conn = pymysql.connect(
+    "us-cdbr-east-05.cleardb.net",
+    "b02b9837c2f815",
+    "1628b5ed",
+    "heroku_13912b51418014f",
+)
 
 
-conn = pymysql.connect("localhost", "root", "22@Nov1985", "backup-bkkmmcx")
+# conn = pymysql.connect("localhost", "root", "22@Nov1985", "backup-bkkmmcx")
 
 
 @app.route("/")
@@ -134,8 +134,16 @@ def insert():
         fltno = request.form["fltno"]
         prefix = request.form["prefix"]
         acreg = request.form["acreg"]
-        ata = request.form["ata"]
-        atd = request.form["atd"]
+        # Ata
+        if request.form["ata"] == "":
+            ata = None
+        else:
+            ata = request.form["ata"]
+        # Atd
+        if request.form["atd"] == "":
+            atd = None
+        else:
+            atd = request.form["atd"]
         bay = request.form["bay"]
         chk = request.form["chk"]
         # Servicing
@@ -169,7 +177,11 @@ def insert():
         mech1 = request.form["mech1"]
         mech2 = request.form["mech2"]
         eng = request.form["eic"]
-        tda = request.form["tda"]
+        # Tda
+        if request.form["tda"] == "":
+            tda = "NO"
+        else:
+            tda = request.form["tda"]
         # Flight remark
         fltrmk = request.form["fltrmk"]
         record = request.form["record"]
@@ -241,7 +253,7 @@ def details(id_data):
     cur.execute(query.eic)
     eic = cur.fetchall()
     cur.execute(
-        f"SELECT DATE_FORMAT(arrdate, '%d/%m/%Y'),TIME_FORMAT(ata, '%H:%i'), TIME_FORMAT(atd, '%H:%i') "
+        f"SELECT DATE_FORMAT(arrdate, '%d/%m/%Y'),TIME_FORMAT(ata, '%H:%i'),TIME_FORMAT(atd, '%H:%i')"
         f"FROM flight WHERE fltid={id_data}"
     )
     datetime = cur.fetchone()
@@ -252,15 +264,24 @@ def details(id_data):
 @app.route("/update/<string:id_data>", methods=["POST"])
 def update(id_data):
     if request.method == "POST":
-        fltid = id_data
+        # fltid = id_data
         # Flight details
         arrdate = request.form["arrdate"]
+        print(arrdate)
         airline = request.form["airline"]
         fltno = request.form["fltno"]
         prefix = request.form["prefix"]
         acreg = request.form["acreg"]
-        ata = request.form["ata"]
-        atd = request.form["atd"]
+        # Ata
+        if request.form["ata"] == "":
+            ata = None
+        else:
+            ata = request.form["ata"]
+        # Atd
+        if request.form["atd"] == "":
+            atd = None
+        else:
+            atd = request.form["atd"]
         bay = request.form["bay"]
         chk = request.form["chk"]
         # Servicing
@@ -294,16 +315,20 @@ def update(id_data):
         mech1 = request.form["mech1"]
         mech2 = request.form["mech2"]
         eng = request.form["eic"]
-        tda = request.form["tda"]
+        # Tda
+        if request.form["tda"] == "":
+            tda = "NO"
+        else:
+            tda = request.form["tda"]
         # Flight remark
         fltrmk = request.form["fltrmk"]
         record = request.form["record"]
         # with conn:
         conn.ping(reconnect=True)
         cur = conn.cursor()
-        sql = query.update
+        update_query = query.update
         cur.execute(
-            sql,
+            update_query,
             (
                 arrdate,
                 airline,
@@ -344,11 +369,11 @@ def update(id_data):
                 tda,
                 fltrmk,
                 record,
-                fltid,
-            ),
+                int(id_data),
+            )
         )
         conn.commit()
-        return redirect(url_for("flight_log"))
+    return redirect(url_for("flight_log"))
 
 
 @app.route("/flight_log")
