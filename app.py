@@ -425,6 +425,5 @@ def report_svc():
     data = (count, detail, count2, detail2)
     return render_template("report_svc.html", title="Reports-Servicing", data=data)
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
