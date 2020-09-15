@@ -80,18 +80,18 @@ wy = """SELECT COALESCE(airline, 'TOTAL'),
         GROUP BY airline
         WITH ROLLUP"""
 
-add_clrd = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '1',
-    SUM(CASE WHEN MONTH(arrdate) = 2 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '2',
-    SUM(CASE WHEN MONTH(arrdate) = 3 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '3',
-    SUM(CASE WHEN MONTH(arrdate) = 4 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '4',
-    SUM(CASE WHEN MONTH(arrdate) = 5 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '5',
-    SUM(CASE WHEN MONTH(arrdate) = 6 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '6',
-    SUM(CASE WHEN MONTH(arrdate) = 7 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '7',
-    SUM(CASE WHEN MONTH(arrdate) = 8 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '8',
-    SUM(CASE WHEN MONTH(arrdate) = 9 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '9',
-    SUM(CASE WHEN MONTH(arrdate) = 10 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '10',
-    SUM(CASE WHEN MONTH(arrdate) = 11 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '11',
-    SUM(CASE WHEN MONTH(arrdate) = 12 THEN padd+sadd+`add`+zadd+cadd+madd ELSE 0 END) AS '12'
+add_clrd = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '1',
+    SUM(CASE WHEN MONTH(arrdate) = 2 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '2',
+    SUM(CASE WHEN MONTH(arrdate) = 3 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '3',
+    SUM(CASE WHEN MONTH(arrdate) = 4 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '4',
+    SUM(CASE WHEN MONTH(arrdate) = 5 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '5',
+    SUM(CASE WHEN MONTH(arrdate) = 6 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '6',
+    SUM(CASE WHEN MONTH(arrdate) = 7 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '7',
+    SUM(CASE WHEN MONTH(arrdate) = 8 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '8',
+    SUM(CASE WHEN MONTH(arrdate) = 9 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '9',
+    SUM(CASE WHEN MONTH(arrdate) = 10 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '10',
+    SUM(CASE WHEN MONTH(arrdate) = 11 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '11',
+    SUM(CASE WHEN MONTH(arrdate) = 12 THEN padd+sadd+nadd+zadd+cadd+madd ELSE 0 END) AS '12'
     FROM flight"""
 
 add_worked = """SELECT SUM(CASE WHEN MONTH(arrdate) = 1 THEN worked ELSE 0 END) AS '1',
@@ -127,14 +127,14 @@ staff = "SELECT name FROM staff"
 eic = "SELECT name FROM staff WHERE role = 'LAME'"
 
 insert = """INSERT INTO flight (fltid, arrdate, airline, fltno, prefix, acreg, ata, atd, bay, chk, 
-    watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, pkg, padd, sadd, `add`, 
+    watersvc, wastesvc, afac, gpu, asu, acu, brk, cherry, platform, pkg, padd, sadd, nadd, 
     zadd, cadd, madd, worked, ovnbay, tpc, waterdrain, wastedrain, fueldrain, stand, wash, 
     mech1, mech2, eng, tda, fltrmk, record) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
     %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
 
 update = """UPDATE flight SET arrdate=%s, airline=%s, fltno=%s, prefix=%s, acreg=%s, ata=%s, atd=%s, bay=%s, chk=%s,
     watersvc=%s, wastesvc=%s, afac=%s, gpu=%s, asu=%s, acu=%s, brk=%s, cherry=%s, platform=%s, pkg=%s, padd=%s, sadd=%s,
-    `add`=%s, zadd=%s, cadd=%s, madd=%s, worked=%s, ovnbay=%s, tpc=%s, waterdrain=%s, wastedrain=%s, fueldrain=%s,
+    nadd=%s, zadd=%s, cadd=%s, madd=%s, worked=%s, ovnbay=%s, tpc=%s, waterdrain=%s, wastedrain=%s, fueldrain=%s,
     stand=%s, wash=%s, mech1=%s, mech2=%s, eng=%s, tda=%s, fltrmk=%s, record=%s WHERE fltid=%s"""
 
 flight_log = """SELECT fltid, DATE_FORMAT(arrdate, '%d %b %y'), airline, fltno, prefix, acreg, TIME_FORMAT(ata, '%H:%i')

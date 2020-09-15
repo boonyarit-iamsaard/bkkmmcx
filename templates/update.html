@@ -252,6 +252,7 @@
                                     <select name="brk" class="form-control form-control-sm" id="brk">
                                         <option value="{{ data[0][16] }}">{{ data[0][16] }}</option>
                                         <option value="BFS">BFS</option>
+                                        <option value="CX">BFS</option>
                                         <option value="TG">TG</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -626,11 +627,10 @@
                                         name="fltrmk"
                                         class="form-control"
                                         id="fltrmk"
-                                        value="{{ data[0][38] }}"
                                         cols="50"
                                         rows="5"
                                         onkeyup="this.value = this.value.toUpperCase();"
-                                    ></textarea>
+                                    >{{ data[0][38] }}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-2">

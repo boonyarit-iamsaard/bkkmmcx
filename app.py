@@ -11,9 +11,6 @@ conn = pymysql.connect(
 )
 
 
-# conn = pymysql.connect("localhost", "root", "22@Nov1985", "backup-bkkmmcx")
-
-
 @app.route("/")
 def dashboard():
     def flight():
@@ -428,6 +425,5 @@ def report_svc():
     data = (count, detail, count2, detail2)
     return render_template("report_svc.html", title="Reports-Servicing", data=data)
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
